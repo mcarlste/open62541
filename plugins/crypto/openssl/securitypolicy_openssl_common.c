@@ -15,7 +15,7 @@ modification history
 #include <open62541/plugin/securitypolicy_default.h>
 #include <open62541/util.h>
 
-#if defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL)
+#if defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL) || defined(UA_ENABLE_PUBSUB_ENCRYPTION_OPENSSL)
 
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
@@ -688,6 +688,38 @@ UA_OpenSSL_AES_256_CBC_Encrypt (const UA_ByteString * iv,
                             UA_ByteString *       data  /* [in/out]*/
                             ) {
     return UA_OpenSSL_Encrypt (iv, key, EVP_aes_256_cbc (), data);
+}
+
+UA_StatusCode
+UA_OpenSSL_AES_128_CTR_Decrypt (const UA_ByteString * iv,
+                                const UA_ByteString * key,
+                                UA_ByteString *       data  /* [in/out]*/
+                                ) {
+    return UA_OpenSSL_Decrypt (iv, key, EVP_aes_128_ctr (), data);
+}
+
+UA_StatusCode
+UA_OpenSSL_AES_128_CTR_Encrypt (const UA_ByteString * iv,
+                                const UA_ByteString * key,
+                                UA_ByteString *       data  /* [in/out]*/
+                               ) {
+    return UA_OpenSSL_Encrypt (iv, key, EVP_aes_128_ctr (), data);
+}
+
+UA_StatusCode
+UA_OpenSSL_AES_256_CTR_Decrypt (const UA_ByteString * iv,
+                                const UA_ByteString * key,
+                                UA_ByteString *       data  /* [in/out]*/
+                                ) {
+    return UA_OpenSSL_Decrypt (iv, key, EVP_aes_256_ctr (), data);
+}
+
+UA_StatusCode
+UA_OpenSSL_AES_256_CTR_Encrypt (const UA_ByteString * iv,
+                                const UA_ByteString * key,
+                                UA_ByteString *       data  /* [in/out]*/
+                               ) {
+    return UA_OpenSSL_Encrypt (iv, key, EVP_aes_256_ctr (), data);
 }
 
 UA_StatusCode
