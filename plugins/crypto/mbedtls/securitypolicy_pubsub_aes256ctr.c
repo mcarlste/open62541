@@ -9,7 +9,7 @@
 #include <open62541/util.h>
 #include "securitypolicy_mbedtls_common.h"
 
-#ifdef UA_ENABLE_PUBSUB_ENCRYPTION
+#ifdef UA_ENABLE_PUBSUB_ENCRYPTION_MBEDTLS
 
 #include <mbedtls/aes.h>
 #include <mbedtls/ctr_drbg.h>

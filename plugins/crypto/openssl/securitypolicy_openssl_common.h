@@ -13,7 +13,7 @@
 #include <open62541/util.h>
 #include <open62541/plugin/securitypolicy.h>
 
-#if defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL)
+#if defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL) || defined(UA_ENABLE_PUBSUB_ENCRYPTION_OPENSSL)
 
 #include <openssl/x509.h>
 #include <openssl/evp.h>
@@ -73,6 +73,27 @@ UA_OpenSSL_AES_256_CBC_Decrypt(const UA_ByteString *iv,
 
 UA_StatusCode
 UA_OpenSSL_AES_256_CBC_Encrypt(const UA_ByteString *iv,
+                               const UA_ByteString *key, 
+                               UA_ByteString *data  /* [in/out]*/);
+
+
+UA_StatusCode
+UA_OpenSSL_AES_128_CTR_Decrypt(const UA_ByteString *iv,
+                               const UA_ByteString *key,
+                               UA_ByteString *data  /* [in/out]*/);
+
+UA_StatusCode
+UA_OpenSSL_AES_128_CTR_Encrypt(const UA_ByteString *iv,
+                               const UA_ByteString *key,
+                               UA_ByteString *data  /* [in/out]*/);
+
+UA_StatusCode
+UA_OpenSSL_AES_256_CTR_Decrypt(const UA_ByteString *iv,
+                               const UA_ByteString *key,
+                               UA_ByteString *data  /* [in/out]*/);
+
+UA_StatusCode
+UA_OpenSSL_AES_256_CTR_Encrypt(const UA_ByteString *iv,
                                const UA_ByteString *key, 
                                UA_ByteString *data  /* [in/out]*/);
 
